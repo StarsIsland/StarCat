@@ -15,6 +15,7 @@
 
 package dev.waterdog.waterdogpe.network.protocol;
 
+import dev.waterdog.waterdogpe.network.protocol.patch.*;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import lombok.ToString;
@@ -66,31 +67,81 @@ public enum ProtocolVersion {
     MINECRAFT_PE_1_13(388, Bedrock_v388.CODEC),
     MINECRAFT_PE_1_14_30(389, Bedrock_v389.CODEC),
     MINECRAFT_PE_1_14_60(390, Bedrock_v390.CODEC),
-    MINECRAFT_PE_1_16(407, Bedrock_v407.CODEC),
-    MINECRAFT_PE_1_16_20(408, Bedrock_v408.CODEC),
-    MINECRAFT_PE_1_16_100(419, Bedrock_v419.CODEC),
-    MINECRAFT_PE_1_16_200(422, Bedrock_v422.CODEC),
-    MINECRAFT_PE_1_16_210(428, Bedrock_v428.CODEC),
-    MINECRAFT_PE_1_16_220(431, Bedrock_v431.CODEC),
-    MINECRAFT_PE_1_17_0(440, Bedrock_v440.CODEC),
-    MINECRAFT_PE_1_17_10(448, Bedrock_v448.CODEC),
-    MINECRAFT_PE_1_17_30(465, Bedrock_v465.CODEC),
-    MINECRAFT_PE_1_17_40(471, Bedrock_v471.CODEC),
-    MINECRAFT_PE_1_18_0(475, Bedrock_v475.CODEC),
-    MINECRAFT_PE_1_18_10(486, Bedrock_v486.CODEC),
-    MINECRAFT_PE_1_18_30(503, Bedrock_v503.CODEC),
-    MINECRAFT_PE_1_19_0(527, Bedrock_v527.CODEC),
-    MINECRAFT_PE_1_19_10(534, Bedrock_v534.CODEC),
-    MINECRAFT_PE_1_19_20(544, Bedrock_v544.CODEC),
-    MINECRAFT_PE_1_19_21(545, Bedrock_v545.CODEC),
-    MINECRAFT_PE_1_19_30(554, Bedrock_v554.CODEC),
-    MINECRAFT_PE_1_19_40(557, Bedrock_v557.CODEC),
-    MINECRAFT_PE_1_19_50(560, Bedrock_v560.CODEC),
-    MINECRAFT_PE_1_19_60(567, Bedrock_v567.CODEC),
-    MINECRAFT_PE_1_19_62(567, 568, Bedrock_v568.CODEC), // this version has not bumped protocol number on client side
-    MINECRAFT_PE_1_19_63(568, Bedrock_v568.CODEC),
-    MINECRAFT_PE_1_19_70(575, Bedrock_v575.CODEC),
-    MINECRAFT_PE_1_19_80(582, Bedrock_v582.CODEC),
+    MINECRAFT_PE_1_16(407, Bedrock_v407.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v407_fix())
+            .build()),
+    MINECRAFT_PE_1_16_20(408, Bedrock_v408.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v407_fix())
+            .build()),
+    MINECRAFT_PE_1_16_100(419, Bedrock_v419.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v419_fix())
+            .build()),
+    MINECRAFT_PE_1_16_200(422, Bedrock_v422.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v419_fix())
+            .build()),
+    MINECRAFT_PE_1_16_210(428, Bedrock_v428.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v428_fix())
+            .build()),
+    MINECRAFT_PE_1_16_220(431, Bedrock_v431.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v428_fix())
+            .build()),
+    MINECRAFT_PE_1_17_0(440, Bedrock_v440.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v440_fix())
+            .build()),
+    MINECRAFT_PE_1_17_10(448, Bedrock_v448.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v440_fix())
+            .build()),
+    MINECRAFT_PE_1_17_30(465, Bedrock_v465.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v465_fix())
+            .build()),
+    MINECRAFT_PE_1_17_40(471, Bedrock_v471.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v465_fix())
+            .build()),
+    MINECRAFT_PE_1_18_0(475, Bedrock_v475.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v475_fix())
+            .build()),
+    MINECRAFT_PE_1_18_10(486, Bedrock_v486.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v475_fix())
+            .build()),
+    MINECRAFT_PE_1_18_30(503, Bedrock_v503.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v503_fix())
+            .build()),
+    MINECRAFT_PE_1_19_0(527, Bedrock_v527.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v527_fix())
+            .build()),
+    MINECRAFT_PE_1_19_10(534, Bedrock_v534.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v534_fix())
+            .build()),
+    MINECRAFT_PE_1_19_20(544, Bedrock_v544.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v544_fix())
+            .build()),
+    MINECRAFT_PE_1_19_21(545, Bedrock_v545.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v544_fix())
+            .build()),
+    MINECRAFT_PE_1_19_30(554, Bedrock_v554.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v544_fix())
+            .build()),
+    MINECRAFT_PE_1_19_40(557, Bedrock_v557.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v544_fix())
+            .build()),
+    MINECRAFT_PE_1_19_50(560, Bedrock_v560.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v544_fix())
+            .build()),
+    MINECRAFT_PE_1_19_60(567, Bedrock_v567.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v567_fix())
+            .build()),
+    MINECRAFT_PE_1_19_62(567, 568, Bedrock_v568.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v567_fix())
+            .build()), // this version has not bumped protocol number on client side
+    MINECRAFT_PE_1_19_63(568, Bedrock_v568.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v567_fix())
+            .build()),
+    MINECRAFT_PE_1_19_70(575, Bedrock_v575.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v567_fix())
+            .build()),
+    MINECRAFT_PE_1_19_80(582, Bedrock_v582.CODEC.toBuilder()
+            .updateSerializer(StartGamePacket.class, new StartGameSerializer_v582_fix())
+            .build()),
     MINECRAFT_PE_1_20_0(589, Bedrock_v589.CODEC.toBuilder()
             .updateSerializer(StartGamePacket.class, new StartGameSerializer_v589_fix())
             .build()),
